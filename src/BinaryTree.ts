@@ -132,16 +132,16 @@ export class BinaryTree {
           if (currentNode !== null) {
 
             this.collector.push(currentNode.data);
-          }
-          if (currentNode && currentNode.left !== null) {
-            queue.enqueue(currentNode.left);
-          }
+            if (currentNode.left !== null) {
+              queue.enqueue(currentNode.left);
+            }
 
-          if (currentNode && currentNode.right !== null) {
-            queue.enqueue(currentNode.right);
-          }
+            if (currentNode.right !== null) {
+              queue.enqueue(currentNode.right);
+            }
 
-          count--;
+            count--;
+          }
         }
       }
     }
