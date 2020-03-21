@@ -148,4 +148,8 @@ export class BinaryTree {
 
     return this.collector;
   }
+
+  verticalOrder(node?: TreeNode | null): (number |undefined)[] {
+
+  }
 }
