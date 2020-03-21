@@ -1,4 +1,5 @@
 import { Queue } from './Queue.ts';
+import { TreeMap } from './TreeMap.ts';
 
 export class TreeNode {
   public data: number;
@@ -9,6 +10,16 @@ export class TreeNode {
     this.data = value;
     this.left = null;
     this.right = null;
+  }
+}
+
+export class NodeDistancePair {
+  public node: TreeNode;
+  public distance: number;
+
+  constructor(node: TreeNode, distance: number) {
+    this.node = node;
+    this.distance = distance;
   }
 }
 
@@ -150,6 +161,42 @@ export class BinaryTree {
   }
 
   verticalOrder(node?: TreeNode | null): (number |undefined)[] {
+    // if no arg is passed, use the root node
+    if (node === undefined) {
+      node = this.root;
+    }
 
+    if (node !== null) {
+      const disMap = new TreeMap<number, Array<TreeNode>>();
+      const queue = new Queue<NodeDistancePair>();
+      queue.enqueue(new NodeDistancePair(node, 0));
+      while (queue.size() > 0) {
+        let el = queue.dequeue();
+        if (el !== null) {
+          if (disMap.has(el.distance)) {
+            disMap.set(el.distance, disMap.get(el.distance).concat(el.node));
+          } else {
+            disMap.set(el.distance, [el.node]);
+          }
+
+          if (el.node.left) {
+            queue.enqueue(new NodeDistancePair(el.node.left, el.distance - 1));
+          }
+
+          if (el.node.right) {
+            queue.enqueue(new NodeDistancePair(el.node.right, el.distance + 1));
+          }
+        }
+      } // end while loop
+      const sortedMap = disMap.getAllSorted();
+      const allValues: number[] = [];
+      sortedMap.forEach(dis => {
+        dis.forEach(n => allValues.push(n.data));
+      });
+
+      return allValues;
+    }
+
+    return [];
   }
 }
