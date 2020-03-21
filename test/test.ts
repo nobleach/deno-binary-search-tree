@@ -65,4 +65,18 @@ Deno.test({
   }
 });
 
+Deno.test({
+  name: "Traverse the tree level order",
+  fn(): void {
+    const binaryTree = new BinaryTree();
+    binaryTree.insert(7);
+    binaryTree.insert(4);
+    binaryTree.insert(3);
+    binaryTree.insert(9);
+    binaryTree.insert(12);
+    binaryTree.insert(2);
+    assertEquals(binaryTree.levelOrder(), [7, 4, 9, 3, 12, 2]);
+  }
+});
+
 await Deno.runTests;

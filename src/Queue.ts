@@ -15,7 +15,7 @@ export class Queue<T> {
     this.storage.push(element);
   }
 
-  dequeue(): T | null{
+  dequeue(): T | null {
     if (this.queueSize === 0) {
       return null;
     }

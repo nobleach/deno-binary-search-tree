@@ -1,3 +1,5 @@
+import { Queue } from './Queue.ts';
+
 export class TreeNode {
   public data: number;
   public left: TreeNode | null;
@@ -108,6 +110,40 @@ export class BinaryTree {
       this.postOrder(node.left);
       this.postOrder(node.right);
       this.collector.push(node?.data);
+    }
+
+    return this.collector;
+  }
+
+  levelOrder(node?: TreeNode | null): (number |undefined)[] {
+    // if no arg is passed, use the root node
+    if (node === undefined) {
+      node = this.root;
+    }
+
+    if (node !== null) {
+      const queue = new Queue<TreeNode>();
+      queue.enqueue(node);
+      while (queue.size() > 0) {
+        let count = queue.size();
+
+        while (count > 0) {
+          let currentNode = queue.dequeue();
+          if (currentNode !== null) {
+
+            this.collector.push(currentNode.data);
+          }
+          if (currentNode && currentNode.left !== null) {
+            queue.enqueue(currentNode.left);
+          }
+
+          if (currentNode && currentNode.right !== null) {
+            queue.enqueue(currentNode.right);
+          }
+
+          count--;
+        }
+      }
     }
 
     return this.collector;
