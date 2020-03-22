@@ -208,4 +208,19 @@ export class BinaryTree {
 
       return [];
   }
+
+  topView(): (number | undefined)[] {
+    const verticalOrderValues = this.verticalOrder();
+      const allValues: number[] = [];
+      if (verticalOrderValues !== null) {
+        verticalOrderValues.forEach(dis => {
+          allValues.push(dis[0].data);
+        });
+
+        return allValues;
+      }
+
+      return [];
+
+  }
 }

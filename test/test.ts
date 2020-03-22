@@ -137,4 +137,26 @@ Deno.test({
   }
 });
 
+/* Tree of this shape:
+          7
+        /   \
+       4     9
+      / \   / \
+     3   5 8   12
+*/
+Deno.test({
+  name: "Returns a top-down view",
+  fn(): void {
+    const binaryTree = new BinaryTree();
+    binaryTree.insert(7);
+    binaryTree.insert(4);
+    binaryTree.insert(9);
+    binaryTree.insert(5);
+    binaryTree.insert(3);
+    binaryTree.insert(8);
+    binaryTree.insert(12);
+    assertEquals(binaryTree.topView(), [3, 4, 7, 9, 12]);
+  }
+});
+
 await Deno.runTests;
