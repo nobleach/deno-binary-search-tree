@@ -160,7 +160,7 @@ export class BinaryTree {
     return this.collector;
   }
 
-  verticalOrder(node?: TreeNode | null): (number |undefined)[] {
+  verticalOrder(node?: TreeNode | null): Map<number, Array<TreeNode>> | null {
     // if no arg is passed, use the root node
     if (node === undefined) {
       node = this.root;
@@ -188,15 +188,24 @@ export class BinaryTree {
           }
         }
       } // end while loop
-      const sortedMap = disMap.getAllSorted();
-      const allValues: number[] = [];
-      sortedMap.forEach(dis => {
-        dis.forEach(n => allValues.push(n.data));
-      });
 
-      return allValues;
+      return disMap.getAllSorted();
     }
 
-    return [];
+    return null;
+  }
+
+  verticalOrderValues(): (number | undefined)[] {
+    const verticalOrderValues = this.verticalOrder();
+      const allValues: number[] = [];
+      if (verticalOrderValues !== null) {
+        verticalOrderValues.forEach(dis => {
+          dis.forEach(n => allValues.push(n.data));
+        });
+
+        return allValues;
+      }
+
+      return [];
   }
 }

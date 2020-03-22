@@ -133,7 +133,7 @@ Deno.test({
     binaryTree.insert(3);
     binaryTree.insert(8);
     binaryTree.insert(12);
-    assertEquals(binaryTree.verticalOrder(), [3, 4, 7, 5, 8, 9, 12]);
+    assertEquals(binaryTree.verticalOrderValues(), [3, 4, 7, 5, 8, 9, 12]);
   }
 });
 
