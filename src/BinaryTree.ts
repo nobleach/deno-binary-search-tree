@@ -38,6 +38,16 @@ export class BinaryTree {
     return this.size;
   }
 
+  getHeight(root: TreeNode | null): number {
+    let node = root;
+    // if we don't have a node, use the root node
+    if (node === null) {
+      return -1;
+    }
+
+    return 1 + Math.max(this.getHeight(node.left), this.getHeight(node.right));
+  }
+
   insert(value: number): void {
     const newNode = new TreeNode(value);
     // Does our root node exist?

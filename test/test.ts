@@ -23,6 +23,31 @@ Deno.test({
   }
 });
 
+
+/* Tree of this shape:
+          7
+        /   \
+       4     9
+      /       \
+     3         12
+    /
+   2
+*/
+Deno.test({
+  name: "Returns the height of the tree",
+  fn(): void {
+    const binaryTree = new BinaryTree();
+    binaryTree.insert(7);
+    binaryTree.insert(4);
+    binaryTree.insert(3);
+    binaryTree.insert(9);
+    binaryTree.insert(12);
+    binaryTree.insert(2);
+    const root = binaryTree.getRoot();
+    assertEquals(binaryTree.getHeight(root), 3);
+  }
+});
+
 /* Tree of this shape:
           7
         /   \
