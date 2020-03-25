@@ -233,4 +233,20 @@ export class BinaryTree {
       return [];
 
   }
+
+  reverse(node?: TreeNode | null): void {
+    // if no arg is passed, use the root node
+    if (node === undefined) {
+      node = this.root;
+    }
+
+    if (node !== null) {
+      this.reverse(node.left);
+      this.reverse(node.right);
+      // Swap left and right child
+      let temp = node.left;
+      node.left = node.right;
+      node.right = temp;
+    }
+  }
 }

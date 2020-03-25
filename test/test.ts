@@ -184,4 +184,29 @@ Deno.test({
   }
 });
 
+/* Tree of this shape:
+          7
+        /   \
+       4     9
+      / \   / \
+     3   5 8   12
+*/
+Deno.test({
+  name: "Returns a reversed tree",
+  fn(): void {
+    const binaryTree = new BinaryTree();
+    binaryTree.insert(7);
+    binaryTree.insert(4);
+    binaryTree.insert(9);
+    binaryTree.insert(5);
+    binaryTree.insert(3);
+    binaryTree.insert(8);
+    binaryTree.insert(12);
+    const inOrder = binaryTree.inOrder();
+    const expected = inOrder.reverse();
+    binaryTree.reverse();
+    assertEquals(expected, binaryTree.inOrder());
+  }
+});
+
 await Deno.runTests;
